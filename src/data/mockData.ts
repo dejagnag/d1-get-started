@@ -42,14 +42,14 @@ export const INSTRUCTORS: Record<string, Instructor> = {
 // Plato-inspired: bright, clean, architecturally minimal
 
 export const CATEGORY_IMAGES: Record<Category, string> = {
-  // Light wood sauna bench — warm natural light, clean Scandi lines
-  Sauna: 'https://images.unsplash.com/photo-1584622650111-993a426fbf0a?w=800&h=500&fit=crop',
+  // Warm birch-wood sauna interior — Clay Banks, clean Scandi lines
+  Sauna: 'https://images.unsplash.com/photo-1608138404239-d2fb9b4f0a6b?w=800&h=500&fit=crop',
   // Outdoor wooden cold plunge tub — natural setting, crisp water
   'Cold Plunge': 'https://images.unsplash.com/photo-1612540139110-4f9b3b85b102?w=800&h=500&fit=crop',
-  // Bright yoga studio with natural light streaming through large windows
+  // Woman in yoga pose in front of bright window — natural light
   Yoga: 'https://images.unsplash.com/photo-1599901860904-17e6ed7083a0?w=800&h=500&fit=crop',
-  // Serene person seated outdoors in soft morning light — breathwork/meditation
-  Breathwork: 'https://images.unsplash.com/photo-1474418397713-7ede21d49118?w=800&h=500&fit=crop',
+  // Person lying in breathwork practice — Wesley Tingey
+  Breathwork: 'https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=800&h=500&fit=crop',
 };
 
 export const CATEGORY_COLORS: Record<Category, { bg: string; text: string; border: string }> = {
@@ -62,17 +62,21 @@ export const CATEGORY_COLORS: Record<Category, { bg: string; text: string; borde
 // ── Session hero images (one clean image per session type) ────────────────────
 
 const IMG = {
-  saunaFinnish:   'https://images.unsplash.com/photo-1584622650111-993a426fbf0a?w=800&h=500&fit=crop',
+  // Warm birch interior — light wood benches, Scandi sauna feel
+  saunaFinnish:   'https://images.unsplash.com/photo-1608138404239-d2fb9b4f0a6b?w=800&h=500&fit=crop',
   saunaInfrared:  'https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?w=800&h=500&fit=crop',
   saunaSteam:     'https://images.unsplash.com/photo-1597733336794-12d05021d510?w=800&h=500&fit=crop',
+  // Outdoor wooden barrel cold plunge tub — natural, crisp
   coldPlunge:     'https://images.unsplash.com/photo-1612540139110-4f9b3b85b102?w=800&h=500&fit=crop',
   coldRecovery:   'https://images.unsplash.com/photo-1520209759809-a9bcb6cb3241?w=800&h=500&fit=crop',
   coldContrast:   'https://images.unsplash.com/photo-1575377222312-dd1a63a51638?w=800&h=500&fit=crop',
+  // Woman in yoga pose in front of bright window
   yogaVinyasa:    'https://images.unsplash.com/photo-1599901860904-17e6ed7083a0?w=800&h=500&fit=crop',
   yogaYin:        'https://images.unsplash.com/photo-1588286840104-8957b019727f?w=800&h=500&fit=crop',
   yogaPower:      'https://images.unsplash.com/photo-1593811167562-9cef47bfc4d7?w=800&h=500&fit=crop',
-  breathBox:      'https://images.unsplash.com/photo-1474418397713-7ede21d49118?w=800&h=500&fit=crop',
-  breathWimHof:   'https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=800&h=500&fit=crop',
+  // Person lying in active breathwork practice — Wesley Tingey
+  breathBox:      'https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=800&h=500&fit=crop',
+  breathWimHof:   'https://images.unsplash.com/photo-1474418397713-7ede21d49118?w=800&h=500&fit=crop',
   breathSound:    'https://images.unsplash.com/photo-1528360983277-13d401cdc186?w=800&h=500&fit=crop',
   breathPrana:    'https://images.unsplash.com/photo-1545205597-3d9d02c29597?w=800&h=500&fit=crop',
 };
