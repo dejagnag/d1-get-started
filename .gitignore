@@ -113,7 +113,7 @@ out
 # Nuxt.js build / generate output
 
 .nuxt
-dist
+# dist is committed so Cloudflare CI can deploy without a build step
 
 # Gatsby files
 
