@@ -55,9 +55,9 @@ export default function LoginPage() {
       {/* Hero image top section */}
       <div className="relative h-56 bg-charcoal overflow-hidden flex-shrink-0">
         <img
-          src="https://images.unsplash.com/photo-1545558014-8692077e9b5c?w=600&h=400&fit=crop&q=70"
-          alt="Sauna interior"
-          className="w-full h-full object-cover opacity-70"
+          src="https://images.unsplash.com/photo-1540555700478-4be289fbecef?w=600&h=400&fit=crop&q=70"
+          alt="Anne Wellness spa"
+          className="w-full h-full object-cover opacity-80"
         />
         <div className="absolute inset-0 bg-gradient-to-b from-charcoal/30 to-charcoal/70" />
 
