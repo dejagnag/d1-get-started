@@ -1,17 +1,17 @@
 /**
- * WeekStrip — horizontal scrollable week calendar strip.
- * Shows 14 days; selected day highlighted. Dots indicate sessions exist.
+ * WeekStrip — Platō style horizontal date selector.
+ * Sharp corners, obsidian/white contrast, hairline borders.
  */
 
 import React, { useRef, useEffect } from 'react';
 
 interface Props {
-  selectedDate: string;           // YYYY-MM-DD
+  selectedDate: string;
   onSelectDate: (d: string) => void;
-  sessionDates: Set<string>;      // which dates have sessions
+  sessionDates: Set<string>;
 }
 
-const DAY_LABELS = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+const DAY_LABELS = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];
 
 function addDays(base: Date, n: number): Date {
   const d = new Date(base);
@@ -27,12 +27,9 @@ export default function WeekStrip({ selectedDate, onSelectDate, sessionDates }: 
   const today = new Date();
   today.setHours(0, 0, 0, 0);
 
-  // Build 14 days starting from today
   const days = Array.from({ length: 14 }, (_, i) => addDays(today, i));
-
   const scrollRef = useRef<HTMLDivElement>(null);
 
-  // Scroll selected day into view on mount / change
   useEffect(() => {
     const idx = days.findIndex(d => toISO(d) === selectedDate);
     if (idx >= 0 && scrollRef.current) {
@@ -44,11 +41,11 @@ export default function WeekStrip({ selectedDate, onSelectDate, sessionDates }: 
   return (
     <div
       ref={scrollRef}
-      className="flex gap-2 overflow-x-auto pb-1 -mx-4 px-4"
+      className="flex gap-0 overflow-x-auto px-8"
       style={{ scrollbarWidth: 'none' }}
     >
-      {days.map(day => {
-        const iso   = toISO(day);
+      {days.map((day, i) => {
+        const iso        = toISO(day);
         const isToday    = iso === toISO(today);
         const isSelected = iso === selectedDate;
         const hasSessions = sessionDates.has(iso);
@@ -57,26 +54,33 @@ export default function WeekStrip({ selectedDate, onSelectDate, sessionDates }: 
           <button
             key={iso}
             onClick={() => onSelectDate(iso)}
-            className={`flex-shrink-0 flex flex-col items-center gap-1 w-12 py-2 rounded-2xl transition-all duration-150
+            className={`flex-shrink-0 flex flex-col items-center gap-1 w-12 py-3 transition-colors duration-150
               ${isSelected
-                ? 'bg-sage text-white shadow-soft'
+                ? 'bg-obsidian text-white'
                 : isToday
-                  ? 'bg-sage-lighter text-sage-dark border border-sage-light'
-                  : 'bg-white text-charcoal border border-stone-lighter'
-              }`}
+                  ? 'bg-void-dim text-obsidian border-y border-void-border'
+                  : 'bg-white text-obsidian-muted border-y border-r border-void-border'
+              }
+              ${i === 0 ? 'border-l border-void-border' : ''}
+            `}
+            style={{ borderWidth: '0.5px' }}
           >
-            <span className={`text-[10px] font-semibold uppercase tracking-wide
-              ${isSelected ? 'text-white/80' : 'text-stone'}`}>
+            <span
+              className={`text-[8px] font-bold tracking-[0.12em] ${isSelected ? 'text-white/60' : 'text-obsidian-muted'}`}
+              style={{ fontFamily: 'JetBrains Mono, monospace' }}
+            >
               {DAY_LABELS[day.getDay()]}
             </span>
-            <span className={`text-base font-bold leading-none
-              ${isSelected ? 'text-white' : ''}`}>
+            <span
+              className={`text-sm font-bold leading-none ${isSelected ? 'text-white' : 'text-obsidian'}`}
+              style={{ fontFamily: 'Syne, sans-serif' }}
+            >
               {day.getDate()}
             </span>
             {/* Session dot */}
-            <span className={`w-1.5 h-1.5 rounded-full transition-colors
+            <span className={`w-1 h-1 transition-colors
               ${hasSessions
-                ? isSelected ? 'bg-white/70' : 'bg-sage'
+                ? isSelected ? 'bg-white/50' : 'bg-obsidian-muted'
                 : 'bg-transparent'
               }`}
             />

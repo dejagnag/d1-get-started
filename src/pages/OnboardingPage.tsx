@@ -1,11 +1,45 @@
 /**
- * OnboardingPage — asks for the user's first and last name after login.
- * Shown once; name is stored in AppContext and used throughout the app.
+ * OnboardingPage — name collection in Sauna Goose aesthetic.
+ * Void white space, Syne headings, hairline inputs.
  */
 
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useApp } from '../context/AppContext';
+
+// Geometric category marks
+const GeoSauna = () => (
+  <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+    <line x1="10" y1="8" x2="10" y2="24" stroke="#1A1A1A" strokeWidth="1"/>
+    <line x1="16" y1="8" x2="16" y2="24" stroke="#1A1A1A" strokeWidth="1"/>
+    <line x1="22" y1="8" x2="22" y2="24" stroke="#1A1A1A" strokeWidth="1"/>
+  </svg>
+);
+const GeoCold = () => (
+  <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+    <rect x="5" y="5" width="22" height="22" stroke="#1A1A1A" strokeWidth="1"/>
+    <circle cx="16" cy="16" r="7" stroke="#1A1A1A" strokeWidth="1"/>
+  </svg>
+);
+const GeoYoga = () => (
+  <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+    <path d="M6 24 Q16 6 26 24" stroke="#1A1A1A" strokeWidth="1" strokeLinecap="round" fill="none"/>
+  </svg>
+);
+const GeoBreath = () => (
+  <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+    <circle cx="16" cy="16" r="3"  stroke="#1A1A1A" strokeWidth="1"/>
+    <circle cx="16" cy="16" r="7"  stroke="#1A1A1A" strokeWidth="1" opacity="0.65"/>
+    <circle cx="16" cy="16" r="11" stroke="#1A1A1A" strokeWidth="1" opacity="0.3"/>
+  </svg>
+);
+
+const PILLARS = [
+  { icon: <GeoSauna />,  label: 'SAUNA',      sub: 'Heat rituals' },
+  { icon: <GeoCold />,   label: 'COLD PLUNGE', sub: 'Cold therapy' },
+  { icon: <GeoYoga />,   label: 'YOGA',        sub: 'Movement' },
+  { icon: <GeoBreath />, label: 'BREATHWORK',  sub: 'Breath science' },
+];
 
 export default function OnboardingPage() {
   const navigate = useNavigate();
@@ -26,32 +60,34 @@ export default function OnboardingPage() {
   }
 
   return (
-    <div className="min-h-dvh bg-cream flex flex-col items-center justify-center px-6 max-w-md mx-auto">
-
-      {/* Logo mark */}
-      <div className="w-16 h-16 bg-sage rounded-3xl flex items-center justify-center mb-6 shadow-soft">
-        <svg width="36" height="36" viewBox="0 0 32 32" fill="none">
-          <path d="M16 4C10 4 5 9 5 16c0 3.5 1.4 6.7 3.7 9L16 28l7.3-3c2.3-2.3 3.7-5.5 3.7-9 0-7-5-12-11-12z" fill="white" fillOpacity="0.3" />
-          <path d="M16 10v12M10 16h12" stroke="white" strokeWidth="2" strokeLinecap="round" />
-        </svg>
-      </div>
+    <div className="min-h-dvh bg-white flex flex-col px-10 max-w-md mx-auto">
 
       {step === 'name' ? (
-        <form onSubmit={handleContinue} className="w-full animate-fade-in">
-          <h1 className="text-3xl font-bold text-charcoal tracking-tight text-center mb-2">
-            Welcome to<br />Anne Wellness
+        <form onSubmit={handleContinue} className="flex flex-col pt-20 pb-10 flex-1 animate-fade-in">
+
+          {/* Brand mark */}
+          <p className="label-mono mb-16">SAUNA GOOSE</p>
+
+          <h1
+            className="text-3xl font-bold text-obsidian tracking-[0.05em] uppercase leading-tight mb-3"
+            style={{ fontFamily: 'Syne, sans-serif' }}
+          >
+            WHAT SHOULD<br />WE CALL YOU?
           </h1>
-          <p className="text-stone text-center text-sm mb-10">
-            Let's personalise your experience. What should we call you?
+          <p
+            className="text-xs text-obsidian-muted tracking-wide mb-12"
+            style={{ fontFamily: 'JetBrains Mono, monospace' }}
+          >
+            Personalise your sanctuary
           </p>
 
-          <div className="flex flex-col gap-3 mb-6">
+          <div className="flex flex-col gap-0 mb-12">
             <input
               type="text"
               placeholder="First name"
               value={firstName}
               onChange={e => setFirstName(e.target.value)}
-              className="input-field text-lg"
+              className="input-void"
               autoFocus
               autoComplete="given-name"
             />
@@ -60,7 +96,7 @@ export default function OnboardingPage() {
               placeholder="Last name (optional)"
               value={lastName}
               onChange={e => setLastName(e.target.value)}
-              className="input-field text-lg"
+              className="input-void border-t-0"
               autoComplete="family-name"
             />
           </div>
@@ -68,39 +104,53 @@ export default function OnboardingPage() {
           <button
             type="submit"
             disabled={!firstName.trim()}
-            className="btn-primary"
+            className="btn-confirm"
           >
-            Continue
+            CONTINUE
           </button>
         </form>
-      ) : (
-        <div className="w-full text-center animate-slide-up">
-          {/* Greeting */}
-          <div className="mb-8">
-            <p className="text-stone text-sm mb-1">Ready for your journey,</p>
-            <h1 className="text-4xl font-bold text-charcoal tracking-tight">
-              {firstName} {lastName}
-            </h1>
-          </div>
 
-          {/* Wellness pillars preview */}
-          <div className="grid grid-cols-2 gap-2.5 mb-10">
-            {[
-              { emoji: '🔥', label: 'Sauna', sub: 'Heat rituals' },
-              { emoji: '❄️', label: 'Cold Plunge', sub: 'Cold therapy' },
-              { emoji: '🧘', label: 'Yoga', sub: 'Mind & body' },
-              { emoji: '🌬️', label: 'Breathwork', sub: 'Breath science' },
-            ].map(p => (
-              <div key={p.label} className="bg-white rounded-2xl p-4 shadow-soft text-left">
-                <span className="text-2xl">{p.emoji}</span>
-                <p className="font-semibold text-charcoal text-sm mt-1">{p.label}</p>
-                <p className="text-stone text-xs">{p.sub}</p>
+      ) : (
+        <div className="flex flex-col pt-20 pb-10 flex-1 animate-slide-up">
+
+          <p className="label-mono mb-12">WELCOME TO THE SANCTUARY</p>
+
+          <h1
+            className="text-4xl font-bold text-obsidian tracking-[0.04em] uppercase leading-tight mb-16"
+            style={{ fontFamily: 'Syne, sans-serif' }}
+          >
+            {firstName}<br />{lastName || ''}
+          </h1>
+
+          {/* Geometric pillars grid */}
+          <div className="grid grid-cols-2 gap-[1px] border border-void-border mb-12">
+            {PILLARS.map(p => (
+              <div
+                key={p.label}
+                className="p-6 border-void-border flex flex-col gap-3 odd:border-r border-b last:border-b-0 [&:nth-child(n+3)]:border-b-0"
+                style={{ borderRight: '0.5px solid #E0E0E0', borderBottom: '0.5px solid #E0E0E0' }}
+              >
+                {p.icon}
+                <div>
+                  <p
+                    className="text-[11px] font-bold text-obsidian tracking-[0.1em] uppercase"
+                    style={{ fontFamily: 'Syne, sans-serif' }}
+                  >
+                    {p.label}
+                  </p>
+                  <p
+                    className="text-[10px] text-obsidian-muted mt-0.5"
+                    style={{ fontFamily: 'JetBrains Mono, monospace' }}
+                  >
+                    {p.sub}
+                  </p>
+                </div>
               </div>
             ))}
           </div>
 
-          <button onClick={handleStart} className="btn-primary">
-            Let's Begin
+          <button onClick={handleStart} className="btn-confirm">
+            ENTER SANCTUARY
           </button>
         </div>
       )}

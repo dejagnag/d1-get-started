@@ -1,11 +1,11 @@
 /**
- * App.tsx — root router with auth guard and onboarding guard.
+ * App.tsx — root router with auth guard, onboarding guard, and Zen navigation.
  */
 
 import React from 'react';
 import { Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import { useApp } from './context/AppContext';
-import BottomNav from './components/BottomNav';
+import ZenNav from './components/ZenNav';
 import LoginPage from './pages/LoginPage';
 import OnboardingPage from './pages/OnboardingPage';
 import HomePage from './pages/HomePage';
@@ -28,11 +28,12 @@ function OnboardGuard({ children }: { children: React.ReactNode }) {
   return <>{children}</>;
 }
 
+// AppShell: renders the floating ZenNav over content
 function AppShell({ children }: { children: React.ReactNode }) {
   return (
-    <div className="relative">
+    <div className="relative max-w-md mx-auto">
+      <ZenNav />
       {children}
-      <BottomNav />
     </div>
   );
 }
@@ -47,11 +48,11 @@ export default function App() {
         element={<AuthGuard><OnboardingPage /></AuthGuard>}
       />
 
-      <Route path="/home"     element={<OnboardGuard><AppShell><HomePage /></AppShell></OnboardGuard>} />
-      <Route path="/browse"   element={<OnboardGuard><AppShell><BrowsePage /></AppShell></OnboardGuard>} />
+      <Route path="/home"        element={<OnboardGuard><AppShell><HomePage /></AppShell></OnboardGuard>} />
+      <Route path="/browse"      element={<OnboardGuard><AppShell><BrowsePage /></AppShell></OnboardGuard>} />
       <Route path="/session/:id" element={<OnboardGuard><AppShell><SessionDetailPage /></AppShell></OnboardGuard>} />
-      <Route path="/bookings" element={<OnboardGuard><AppShell><BookingsPage /></AppShell></OnboardGuard>} />
-      <Route path="/profile"  element={<OnboardGuard><AppShell><ProfilePage /></AppShell></OnboardGuard>} />
+      <Route path="/bookings"    element={<OnboardGuard><AppShell><BookingsPage /></AppShell></OnboardGuard>} />
+      <Route path="/profile"     element={<OnboardGuard><AppShell><ProfilePage /></AppShell></OnboardGuard>} />
 
       <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>

@@ -1,25 +1,63 @@
 /**
- * HomePage — welcoming dashboard with greeting, featured sessions,
- * category quick-access tiles, and a next-upcoming-booking card.
+ * HomePage — The Welcome Sanctuary.
+ * Architectural white space, Syne headings, geometric category access.
  */
 
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useApp } from '../context/AppContext';
-import { SESSIONS, FEATURED_SESSION_IDS, CATEGORY_IMAGES } from '../data/mockData';
-import SessionCard from '../components/SessionCard';
-import CategoryTile from '../components/CategoryTile';
+import { SESSIONS, FEATURED_SESSION_IDS } from '../data/mockData';
 import { Category } from '../types';
 
 const CATEGORIES: Category[] = ['Sauna', 'Cold Plunge', 'Yoga', 'Breathwork'];
 
-// Format greeting based on time of day
 function getGreeting(): string {
   const h = new Date().getHours();
-  if (h < 12) return 'Good morning';
-  if (h < 17) return 'Good afternoon';
-  return 'Good evening';
+  if (h < 12) return 'GOOD MORNING';
+  if (h < 17) return 'GOOD AFTERNOON';
+  return 'GOOD EVENING';
 }
+
+// Geometric icons (same as onboarding)
+const GeoSauna = () => (
+  <svg width="28" height="28" viewBox="0 0 32 32" fill="none">
+    <line x1="10" y1="8" x2="10" y2="24" stroke="#1A1A1A" strokeWidth="1"/>
+    <line x1="16" y1="8" x2="16" y2="24" stroke="#1A1A1A" strokeWidth="1"/>
+    <line x1="22" y1="8" x2="22" y2="24" stroke="#1A1A1A" strokeWidth="1"/>
+  </svg>
+);
+const GeoCold = () => (
+  <svg width="28" height="28" viewBox="0 0 32 32" fill="none">
+    <rect x="5" y="5" width="22" height="22" stroke="#1A1A1A" strokeWidth="1"/>
+    <circle cx="16" cy="16" r="7" stroke="#1A1A1A" strokeWidth="1"/>
+  </svg>
+);
+const GeoYoga = () => (
+  <svg width="28" height="28" viewBox="0 0 32 32" fill="none">
+    <path d="M6 24 Q16 6 26 24" stroke="#1A1A1A" strokeWidth="1" strokeLinecap="round"/>
+  </svg>
+);
+const GeoBreath = () => (
+  <svg width="28" height="28" viewBox="0 0 32 32" fill="none">
+    <circle cx="16" cy="16" r="3"  stroke="#1A1A1A" strokeWidth="1"/>
+    <circle cx="16" cy="16" r="7"  stroke="#1A1A1A" strokeWidth="1" opacity="0.6"/>
+    <circle cx="16" cy="16" r="11" stroke="#1A1A1A" strokeWidth="1" opacity="0.28"/>
+  </svg>
+);
+
+const GEO_ICONS: Record<Category, React.ReactNode> = {
+  Sauna:        <GeoSauna />,
+  'Cold Plunge': <GeoCold />,
+  Yoga:          <GeoYoga />,
+  Breathwork:    <GeoBreath />,
+};
+
+const CATEGORY_SUBS: Record<Category, string> = {
+  Sauna:        'Heat rituals',
+  'Cold Plunge': 'Cold therapy',
+  Yoga:          'Movement',
+  Breathwork:    'Breath science',
+};
 
 export default function HomePage() {
   const navigate = useNavigate();
@@ -29,119 +67,177 @@ export default function HomePage() {
     .map(id => SESSIONS.find(s => s.id === id))
     .filter(Boolean) as typeof SESSIONS;
 
-  // Next upcoming booking (first in list with status upcoming)
   const nextBooking = bookings.find(b => b.status === 'upcoming');
 
-  // Today's sessions (first 4)
-  const todaySessions = SESSIONS.slice(0, 4);
-
   return (
-    <div className="page-container pt-0">
-      {/* ── Header / hero ────────────────────────────────────── */}
-      <div className="relative -mx-4 bg-charcoal overflow-hidden">
-        <img
-          src="https://images.unsplash.com/photo-1515377905703-c4788e51af15?w=600&h=320&fit=crop&q=70"
-          alt="Anne Wellness"
-          className="w-full h-48 object-cover opacity-75"
-        />
-        <div className="absolute inset-0 bg-gradient-to-b from-charcoal/20 to-charcoal/80" />
-        <div className="absolute bottom-0 left-0 right-0 px-5 pb-5 pt-8">
-          <p className="text-white/75 text-sm">{getGreeting()},</p>
-          <h1 className="text-white text-2xl font-bold tracking-tight">{user.firstName} 👋</h1>
-        </div>
-        {/* Notification bell */}
-        <button className="absolute top-4 right-4 w-9 h-9 bg-white/15 backdrop-blur-sm rounded-full flex items-center justify-center">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.8">
-            <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9" />
-            <path d="M13.73 21a2 2 0 0 1-3.46 0" />
-          </svg>
-        </button>
+    <div className="page-void">
+
+      {/* ── Greeting ─────────────────────────────────────────── */}
+      <div className="mb-16">
+        <p
+          className="text-[10px] text-obsidian-muted uppercase tracking-[0.2em] mb-3"
+          style={{ fontFamily: 'JetBrains Mono, monospace' }}
+        >
+          {getGreeting()}
+        </p>
+        <h1
+          className="text-4xl font-bold text-obsidian tracking-[0.04em] uppercase leading-none"
+          style={{ fontFamily: 'Syne, sans-serif' }}
+        >
+          {user.firstName}
+        </h1>
+        <p
+          className="mt-3 text-sm text-obsidian-muted leading-relaxed max-w-[240px]"
+          style={{ fontFamily: 'Inter, sans-serif' }}
+        >
+          Transcending stillness — your sanctuary awaits.
+        </p>
       </div>
 
       {/* ── Next booking banner ───────────────────────────────── */}
       {nextBooking && (
-        <div
-          role="button"
-          tabIndex={0}
+        <button
           onClick={() => navigate(`/session/${nextBooking.session.id}`)}
-          className="mt-4 bg-sage-lighter border border-sage-light rounded-2xl p-4 flex items-center gap-3 active:scale-[0.99] transition-transform cursor-pointer"
+          className="w-full mb-14 text-left border border-void-border p-5 flex items-start justify-between gap-4 active:bg-void-dim transition-colors"
         >
-          <div className="w-10 h-10 bg-sage rounded-xl flex items-center justify-center flex-shrink-0">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2">
-              <rect x="3" y="4" width="18" height="18" rx="2" />
-              <line x1="16" y1="2" x2="16" y2="6" />
-              <line x1="8" y1="2" x2="8" y2="6" />
-              <line x1="3" y1="10" x2="21" y2="10" />
-            </svg>
-          </div>
-          <div className="flex-1 min-w-0">
-            <p className="text-[11px] text-sage-dark font-semibold uppercase tracking-wide">Next booking</p>
-            <p className="text-charcoal font-semibold text-sm truncate">{nextBooking.session.name}</p>
-            <p className="text-stone text-xs">
+          <div>
+            <p className="label-mono mb-2">NEXT SESSION</p>
+            <p className="font-semibold text-obsidian text-sm"
+               style={{ fontFamily: 'Syne, sans-serif' }}>
+              {nextBooking.session.name}
+            </p>
+            <p
+              className="text-[11px] text-obsidian-muted mt-1"
+              style={{ fontFamily: 'JetBrains Mono, monospace' }}
+            >
               {new Date(`${nextBooking.session.date}T00:00:00`).toLocaleDateString('en-ZA', {
                 weekday: 'short', month: 'short', day: 'numeric'
               })} · {nextBooking.session.startTime}
             </p>
           </div>
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-stone flex-shrink-0">
-            <polyline points="9 18 15 12 9 6" />
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#6B6B6B" strokeWidth="1.5" className="flex-shrink-0 mt-1">
+            <polyline points="9 18 15 12 9 6"/>
           </svg>
-        </div>
+        </button>
       )}
 
-      {/* ── Categories ────────────────────────────────────────── */}
-      <section className="mt-6">
-        <div className="flex items-center justify-between mb-3">
-          <h2 className="section-heading">Explore</h2>
+      {/* ── Gallery of Shapes — category access ──────────────── */}
+      <section className="mb-14">
+        <div className="flex items-baseline justify-between mb-6">
+          <h2
+            className="text-xs font-bold text-obsidian uppercase tracking-[0.12em]"
+            style={{ fontFamily: 'Syne, sans-serif' }}
+          >
+            EXPLORE
+          </h2>
+          <button
+            onClick={() => navigate('/browse')}
+            className="label-mono underline underline-offset-4"
+          >
+            Browse all
+          </button>
         </div>
-        <div className="grid grid-cols-2 gap-2.5">
-          {CATEGORIES.map(cat => (
-            <CategoryTile key={cat} category={cat} />
+
+        {/* 2×2 grid with hairline borders */}
+        <div
+          className="grid grid-cols-2 border border-void-border"
+          style={{ borderWidth: '0.5px' }}
+        >
+          {CATEGORIES.map((cat, i) => (
+            <button
+              key={cat}
+              onClick={() => navigate(`/browse?category=${encodeURIComponent(cat)}`)}
+              className="p-6 flex flex-col gap-4 text-left active:bg-void-dim transition-colors"
+              style={{
+                borderRight:  i % 2 === 0 ? '0.5px solid #E0E0E0' : undefined,
+                borderBottom: i < 2       ? '0.5px solid #E0E0E0' : undefined,
+              }}
+            >
+              {GEO_ICONS[cat]}
+              <div>
+                <p
+                  className="text-[11px] font-bold text-obsidian uppercase tracking-[0.1em]"
+                  style={{ fontFamily: 'Syne, sans-serif' }}
+                >
+                  {cat}
+                </p>
+                <p
+                  className="text-[10px] text-obsidian-muted mt-0.5"
+                  style={{ fontFamily: 'JetBrains Mono, monospace' }}
+                >
+                  {CATEGORY_SUBS[cat]}
+                </p>
+              </div>
+            </button>
           ))}
         </div>
       </section>
 
       {/* ── Featured experiences ──────────────────────────────── */}
-      <section className="mt-6">
-        <div className="flex items-center justify-between mb-3">
-          <h2 className="section-heading">Featured Experiences</h2>
+      <section className="mb-14">
+        <div className="flex items-baseline justify-between mb-6">
+          <h2
+            className="text-xs font-bold text-obsidian uppercase tracking-[0.12em]"
+            style={{ fontFamily: 'Syne, sans-serif' }}
+          >
+            FEATURED
+          </h2>
           <button
             onClick={() => navigate('/browse')}
-            className="text-sage text-sm font-semibold"
+            className="label-mono underline underline-offset-4"
           >
             See all
           </button>
         </div>
-        {/* Horizontal scroll */}
-        <div className="flex gap-3 overflow-x-auto pb-2 -mx-4 px-4 scrollbar-none" style={{ scrollbarWidth: 'none' }}>
-          {featuredSessions.map(session => (
-            <SessionCard key={session.id} session={session} compact />
+
+        <div className="flex flex-col gap-[0.5px] border border-void-border overflow-hidden"
+             style={{ borderWidth: '0.5px' }}>
+          {featuredSessions.map((session, i) => (
+            <button
+              key={session.id}
+              onClick={() => navigate(`/session/${session.id}`)}
+              className="flex items-start gap-5 p-5 text-left bg-white active:bg-void-dim transition-colors"
+              style={{ borderBottom: i < featuredSessions.length - 1 ? '0.5px solid #E0E0E0' : undefined }}
+            >
+              {/* Thumbnail */}
+              <div className="w-14 h-14 flex-shrink-0 overflow-hidden bg-void-subtle">
+                <img
+                  src={`${session.heroImage}&w=112&h=112&q=60`}
+                  alt={session.name}
+                  className="w-full h-full object-cover"
+                  loading="lazy"
+                />
+              </div>
+              <div className="flex-1 min-w-0">
+                <p className="label-mono mb-1">{session.category}</p>
+                <p
+                  className="text-sm font-semibold text-obsidian leading-snug"
+                  style={{ fontFamily: 'Syne, sans-serif' }}
+                >
+                  {session.name}
+                </p>
+                <p
+                  className="text-[11px] text-obsidian-muted mt-1"
+                  style={{ fontFamily: 'JetBrains Mono, monospace' }}
+                >
+                  {session.startTime} · {session.durationMinutes}min · R{session.priceZAR}
+                </p>
+              </div>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#BEBEBE" strokeWidth="1.5" className="flex-shrink-0 mt-1">
+                <polyline points="9 18 15 12 9 6"/>
+              </svg>
+            </button>
           ))}
         </div>
       </section>
 
-      {/* ── Coming up this week ───────────────────────────────── */}
-      <section className="mt-6">
-        <div className="flex items-center justify-between mb-3">
-          <h2 className="section-heading">This Week</h2>
-          <button
-            onClick={() => navigate('/browse')}
-            className="text-sage text-sm font-semibold"
-          >
-            See all
-          </button>
-        </div>
-        <div className="flex flex-col gap-3">
-          {todaySessions.map(session => (
-            <SessionCard key={session.id} session={session} />
-          ))}
-        </div>
-      </section>
-
-      {/* ── Footer tagline ────────────────────────────────────── */}
-      <div className="mt-8 mb-2 text-center">
-        <p className="text-stone text-xs">Anne Wellness · Johannesburg · Northern Suburbs</p>
-        <p className="text-stone/60 text-xs mt-0.5">Find your calm. Embrace the contrast.</p>
+      {/* ── Footer ───────────────────────────────────────────── */}
+      <div className="pt-6 border-t border-void-border" style={{ borderTopWidth: '0.5px' }}>
+        <p className="label-mono">Sauna Goose · Johannesburg</p>
+        <p className="text-[10px] text-obsidian-muted/50 mt-1"
+           style={{ fontFamily: 'JetBrains Mono, monospace' }}>
+          Transcending Stillness
+        </p>
       </div>
     </div>
   );
