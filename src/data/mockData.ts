@@ -1,7 +1,6 @@
 /**
- * Mock data for Anne Wellness.
- * Sessions are spread across the coming week from 2 April 2026.
- * All prices in ZAR.
+ * Mock data for Anne Wellness — full week schedule with multiple sessions per day.
+ * Today is 2 April 2026. Sessions run Thu 2 Apr → Thu 9 Apr.
  */
 
 import { Category, Instructor, Session } from '../types';
@@ -39,274 +38,166 @@ export const INSTRUCTORS: Record<string, Instructor> = {
   },
 };
 
-// ── Category hero images ─────────────────────────────────────────────────────
+// ── Category images ───────────────────────────────────────────────────────────
+// Plato-inspired: bright, clean, architecturally minimal
 
 export const CATEGORY_IMAGES: Record<Category, string> = {
-  // Bright light-wood sauna interior — clean Scandinavian lines
+  // Light wood sauna bench — warm natural light, clean Scandi lines
   Sauna: 'https://images.unsplash.com/photo-1584622650111-993a426fbf0a?w=800&h=500&fit=crop',
-  // Crystal-clear pool with geometric tile — minimal & graphic
-  'Cold Plunge': 'https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=800&h=500&fit=crop',
-  // Bright studio with natural light flooding through windows
+  // Outdoor wooden cold plunge tub — natural setting, crisp water
+  'Cold Plunge': 'https://images.unsplash.com/photo-1612540139110-4f9b3b85b102?w=800&h=500&fit=crop',
+  // Bright yoga studio with natural light streaming through large windows
   Yoga: 'https://images.unsplash.com/photo-1599901860904-17e6ed7083a0?w=800&h=500&fit=crop',
-  // Serene outdoor meditation, soft natural light
+  // Serene person seated outdoors in soft morning light — breathwork/meditation
   Breathwork: 'https://images.unsplash.com/photo-1474418397713-7ede21d49118?w=800&h=500&fit=crop',
 };
 
 export const CATEGORY_COLORS: Record<Category, { bg: string; text: string; border: string }> = {
-  Sauna:       { bg: 'bg-wood-lighter',  text: 'text-wood-dark',  border: 'border-wood-light' },
-  'Cold Plunge': { bg: 'bg-blue-50',     text: 'text-blue-700',   border: 'border-blue-200' },
-  Yoga:        { bg: 'bg-sage-lighter',  text: 'text-sage-dark',  border: 'border-sage-light' },
-  Breathwork:  { bg: 'bg-purple-50',     text: 'text-purple-700', border: 'border-purple-200' },
+  Sauna:         { bg: 'bg-wood-lighter',  text: 'text-wood-dark',  border: 'border-wood-light' },
+  'Cold Plunge': { bg: 'bg-sky-50',        text: 'text-sky-700',    border: 'border-sky-200' },
+  Yoga:          { bg: 'bg-sage-lighter',  text: 'text-sage-dark',  border: 'border-sage-light' },
+  Breathwork:    { bg: 'bg-purple-50',     text: 'text-purple-700', border: 'border-purple-200' },
 };
 
-// ── Sessions ─────────────────────────────────────────────────────────────────
+// ── Session hero images (one clean image per session type) ────────────────────
+
+const IMG = {
+  saunaFinnish:   'https://images.unsplash.com/photo-1584622650111-993a426fbf0a?w=800&h=500&fit=crop',
+  saunaInfrared:  'https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?w=800&h=500&fit=crop',
+  saunaSteam:     'https://images.unsplash.com/photo-1597733336794-12d05021d510?w=800&h=500&fit=crop',
+  coldPlunge:     'https://images.unsplash.com/photo-1612540139110-4f9b3b85b102?w=800&h=500&fit=crop',
+  coldRecovery:   'https://images.unsplash.com/photo-1520209759809-a9bcb6cb3241?w=800&h=500&fit=crop',
+  coldContrast:   'https://images.unsplash.com/photo-1575377222312-dd1a63a51638?w=800&h=500&fit=crop',
+  yogaVinyasa:    'https://images.unsplash.com/photo-1599901860904-17e6ed7083a0?w=800&h=500&fit=crop',
+  yogaYin:        'https://images.unsplash.com/photo-1588286840104-8957b019727f?w=800&h=500&fit=crop',
+  yogaPower:      'https://images.unsplash.com/photo-1593811167562-9cef47bfc4d7?w=800&h=500&fit=crop',
+  breathBox:      'https://images.unsplash.com/photo-1474418397713-7ede21d49118?w=800&h=500&fit=crop',
+  breathWimHof:   'https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=800&h=500&fit=crop',
+  breathSound:    'https://images.unsplash.com/photo-1528360983277-13d401cdc186?w=800&h=500&fit=crop',
+  breathPrana:    'https://images.unsplash.com/photo-1545205597-3d9d02c29597?w=800&h=500&fit=crop',
+};
+
+// ── Session descriptions ──────────────────────────────────────────────────────
+
+const DESC = {
+  saunaFinnish: 'Step into an authentic Finnish löyly experience. This guided session takes you through the full heat ritual — including proper sauna etiquette, timed rounds, and a cool-down protocol. Heated birch branches (whisks) are available on request.',
+  saunaInfrared: 'Infrared technology heats your body directly at a lower ambient temperature — highly accessible for those sensitive to intense heat. This session focuses on deep-tissue detoxification with curated sound healing.',
+  saunaSteam: 'A luxurious journey combining dry Finnish sauna heat with aromatic eucalyptus steam. The session alternates between hot and cool environments to stimulate circulation and deeply cleanse the skin. Ends with a warm herbal tea ceremony.',
+  coldPlunge: 'A structured cold-water immersion experience. You\'ll learn proper breathing techniques before and during the plunge, understand the science of cold shock response, and build mental resilience through controlled exposure.',
+  coldRecovery: 'A recovery-focused session for athletes. Combines targeted cold immersion with static stretching and breathing protocols to flush lactic acid, reduce inflammation, and accelerate recovery.',
+  coldContrast: 'The ultimate contrast experience — alternating between our 90°C Finnish sauna and a 10°C cold plunge across three timed rounds. Gold standard for cardiovascular conditioning, mood uplift, and skin health.',
+  yogaVinyasa: 'An energising vinyasa flow linking breath with movement through sun salutations, standing postures, and heart openers. All levels welcome — modifications provided throughout.',
+  yogaYin: 'A slow, meditative practice targeting the deep connective tissues. Poses are held for 3–5 minutes each, encouraging deep release and nervous system down-regulation. Perfect after a sauna session.',
+  yogaPower: 'A challenging power vinyasa for intermediate and advanced practitioners. Expect arm balances, inversions, and core work. Precise, encouraging, infused with Ashtanga roots.',
+  breathBox: 'Introducing Box Breathing (4-4-4-4) — the technique used by Navy SEALs for stress management. Marcus walks you through the science, guides multiple rounds, and finishes with integration journaling.',
+  breathWimHof: 'Based on the Wim Hof Method — controlled breathing, cold exposure mindset, and meditation. Experience the intense clarity and energy surge that follows a full breathwork set.',
+  breathSound: 'An immersive 90-minute experience combining active breathwork with live crystal singing bowl sound healing. Guided into a state of deep relaxation and heightened awareness.',
+  breathPrana: 'Classical yogic pranayama — Nadi Shodhana, Kapalabhati, and Ujjayi — followed by a 20-minute guided Yoga Nidra relaxation. A weekday reset before a busy day.',
+};
+
+const BRING = {
+  sauna: ['Towel (two if possible)', 'Swimwear or sarong', 'Water bottle', 'Flip-flops'],
+  cold: ['Swimwear', 'Warm dry clothes for after', 'Towel', 'Water bottle'],
+  yoga: ['Yoga mat', 'Comfortable activewear', 'Small towel', 'Water bottle'],
+  breathwork: ['Comfortable clothes', 'Yoga mat or blanket', 'Water bottle'],
+};
+
+// ── Helper to create a session ────────────────────────────────────────────────
+
+let _id = 0;
+function s(
+  name: string,
+  category: Category,
+  desc: string,
+  date: string,
+  start: string,
+  end: string,
+  dur: number,
+  instructor: Instructor,
+  total: number,
+  remaining: number,
+  price: number,
+  img: string,
+  bring: string[],
+): Session {
+  return {
+    id: `s${++_id}`,
+    name, category, description: desc, date,
+    startTime: start, endTime: end, durationMinutes: dur,
+    instructor, spotsTotal: total, spotsRemaining: remaining,
+    priceZAR: price, heroImage: img, whatToBring: bring,
+  };
+}
+
+// ── Full weekly schedule (Thu 2 Apr → Thu 9 Apr 2026) ────────────────────────
 
 export const SESSIONS: Session[] = [
-  // ── SAUNA ────────────────────────────────────────────────────
-  {
-    id: 's1',
-    name: 'Traditional Finnish Sauna',
-    category: 'Sauna',
-    description:
-      'Step into an authentic Finnish löyly experience. This guided session takes you through the full heat ritual — including proper sauna etiquette, timed rounds, and a cool-down protocol. Heated birch branches (whisks) are available on request. Ideal for first-timers and seasoned sauna lovers alike.',
-    date: '2026-04-03',
-    startTime: '08:00',
-    endTime: '09:30',
-    durationMinutes: 90,
-    instructor: INSTRUCTORS.annika,
-    spotsTotal: 12,
-    spotsRemaining: 5,
-    priceZAR: 250,
-    heroImage: 'https://images.unsplash.com/photo-1584622650111-993a426fbf0a?w=800&h=500&fit=crop',
-    whatToBring: ['Towel (two if possible)', 'Swimwear or sarong', 'Water bottle', 'Flip-flops', 'Open mind'],
-  },
-  {
-    id: 's2',
-    name: 'Infrared Sauna Journey',
-    category: 'Sauna',
-    description:
-      'Unlike traditional saunas, infrared technology heats your body directly at a lower ambient temperature — making it highly accessible for those sensitive to intense heat. This session focuses on deep-tissue detoxification and uses curated sound healing to enhance your relaxation.',
-    date: '2026-04-05',
-    startTime: '10:00',
-    endTime: '11:00',
-    durationMinutes: 60,
-    instructor: INSTRUCTORS.annika,
-    spotsTotal: 8,
-    spotsRemaining: 3,
-    priceZAR: 300,
-    heroImage: 'https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?w=800&h=500&fit=crop',
-    whatToBring: ['Light towel', 'Loose clothing for after', 'Water bottle'],
-  },
-  {
-    id: 's3',
-    name: 'Sauna & Steam Ritual',
-    category: 'Sauna',
-    description:
-      'A luxurious 90-minute journey combining dry Finnish sauna heat with aromatic eucalyptus steam. The session alternates between hot and cool environments to stimulate circulation and deeply cleanse the skin. Ends with a warm herbal tea ceremony.',
-    date: '2026-04-07',
-    startTime: '17:00',
-    endTime: '18:30',
-    durationMinutes: 90,
-    instructor: INSTRUCTORS.annika,
-    spotsTotal: 10,
-    spotsRemaining: 7,
-    priceZAR: 350,
-    heroImage: 'https://images.unsplash.com/photo-1597733336794-12d05021d510?w=800&h=500&fit=crop',
-    whatToBring: ['Two towels', 'Swimwear', 'Water bottle', 'Any personal skin products'],
-  },
 
-  // ── COLD PLUNGE ───────────────────────────────────────────────
-  {
-    id: 'c1',
-    name: 'Guided Ice Bath Immersion',
-    category: 'Cold Plunge',
-    description:
-      'A structured cold-water immersion experience led by Themba. You\'ll learn proper breathing techniques before and during the plunge, understand the science of cold shock response, and build mental resilience through controlled exposure. Suitable for complete beginners.',
-    date: '2026-04-03',
-    startTime: '07:00',
-    endTime: '08:00',
-    durationMinutes: 60,
-    instructor: INSTRUCTORS.themba,
-    spotsTotal: 8,
-    spotsRemaining: 4,
-    priceZAR: 200,
-    heroImage: 'https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=800&h=500&fit=crop',
-    whatToBring: ['Swimwear', 'Warm dry clothes for after', 'Towel', 'Water bottle'],
-  },
-  {
-    id: 'c2',
-    name: 'Cold Plunge & Recovery',
-    category: 'Cold Plunge',
-    description:
-      'A recovery-focused session designed for athletes and active individuals. Combines targeted cold immersion with static stretching and breathing protocols to flush lactic acid, reduce inflammation, and accelerate recovery.',
-    date: '2026-04-06',
-    startTime: '06:30',
-    endTime: '07:30',
-    durationMinutes: 60,
-    instructor: INSTRUCTORS.themba,
-    spotsTotal: 10,
-    spotsRemaining: 6,
-    priceZAR: 180,
-    heroImage: 'https://images.unsplash.com/photo-1520209759809-a9bcb6cb3241?w=800&h=500&fit=crop',
-    whatToBring: ['Swimwear', 'Warm towel', 'Foam roller (optional)', 'Protein snack for after'],
-  },
-  {
-    id: 'c3',
-    name: 'Contrast Therapy Circuit',
-    category: 'Cold Plunge',
-    description:
-      'The ultimate contrast experience — alternating between our 90°C Finnish sauna and a 10°C cold plunge pool across three carefully timed rounds. This circuit is the gold standard for cardiovascular conditioning, mood uplift, and skin health.',
-    date: '2026-04-08',
-    startTime: '09:00',
-    endTime: '10:30',
-    durationMinutes: 90,
-    instructor: INSTRUCTORS.themba,
-    spotsTotal: 12,
-    spotsRemaining: 8,
-    priceZAR: 380,
-    heroImage: 'https://images.unsplash.com/photo-1575377222312-dd1a63a51638?w=800&h=500&fit=crop',
-    whatToBring: ['Swimwear', 'Two towels', 'Water bottle', 'Warm layers for after'],
-  },
+  // ── Thursday 2 Apr (today) ────────────────────────────────────────────────
+  s('Morning Pranayama & Breath',   'Breathwork', DESC.breathPrana,   '2026-04-02', '06:30', '07:30', 60,  INSTRUCTORS.marcus,  16, 10, 160, IMG.breathPrana,  BRING.breathwork),
+  s('Guided Ice Bath Immersion',    'Cold Plunge', DESC.coldPlunge,   '2026-04-02', '07:00', '08:00', 60,  INSTRUCTORS.themba,   8,  4, 200, IMG.coldPlunge,   BRING.cold),
+  s('Traditional Finnish Sauna',   'Sauna',       DESC.saunaFinnish, '2026-04-02', '09:00', '10:30', 90,  INSTRUCTORS.annika,  12,  5, 250, IMG.saunaFinnish, BRING.sauna),
+  s('Restorative Yin Yoga',        'Yoga',        DESC.yogaYin,      '2026-04-02', '18:00', '19:15', 75,  INSTRUCTORS.priya,   12,  7, 220, IMG.yogaYin,      BRING.yoga),
+  s('Box Breathwork Fundamentals', 'Breathwork',  DESC.breathBox,    '2026-04-02', '18:30', '19:30', 60,  INSTRUCTORS.marcus,  16, 11, 180, IMG.breathBox,    BRING.breathwork),
 
-  // ── YOGA ──────────────────────────────────────────────────────
-  {
-    id: 'y1',
-    name: 'Sunrise Vinyasa Flow',
-    category: 'Yoga',
-    description:
-      'Start your day with an energising vinyasa flow as the sun rises over the Highveld. This dynamic class links breath with movement through a creative sequence of sun salutations, standing postures, and heart openers. All levels welcome — modifications provided throughout.',
-    date: '2026-04-04',
-    startTime: '06:30',
-    endTime: '07:30',
-    durationMinutes: 60,
-    instructor: INSTRUCTORS.priya,
-    spotsTotal: 14,
-    spotsRemaining: 9,
-    priceZAR: 200,
-    heroImage: 'https://images.unsplash.com/photo-1599901860904-17e6ed7083a0?w=800&h=500&fit=crop',
-    whatToBring: ['Yoga mat', 'Comfortable activewear', 'Small towel', 'Water bottle'],
-  },
-  {
-    id: 'y2',
-    name: 'Restorative Yin Yoga',
-    category: 'Yoga',
-    description:
-      'Yin yoga is a slow, meditative practice that targets the deep connective tissues of the body. Poses are held for 3–5 minutes each, encouraging deep release and nervous system down-regulation. Perfect after a sauna session or a long week.',
-    date: '2026-04-05',
-    startTime: '18:00',
-    endTime: '19:15',
-    durationMinutes: 75,
-    instructor: INSTRUCTORS.priya,
-    spotsTotal: 12,
-    spotsRemaining: 2,
-    priceZAR: 220,
-    heroImage: 'https://images.unsplash.com/photo-1588286840104-8957b019727f?w=800&h=500&fit=crop',
-    whatToBring: ['Yoga mat', 'Blanket or large towel', 'Bolster (provided if needed)', 'Comfortable, loose clothing'],
-  },
-  {
-    id: 'y3',
-    name: 'Power Flow Yoga',
-    category: 'Yoga',
-    description:
-      'A challenging, sweat-inducing power vinyasa class for intermediate and advanced practitioners. Expect creative sequencing, arm balances, inversions, and core work. Priya\'s teaching style is precise, encouraging, and infused with Ashtanga roots.',
-    date: '2026-04-09',
-    startTime: '07:00',
-    endTime: '08:15',
-    durationMinutes: 75,
-    instructor: INSTRUCTORS.priya,
-    spotsTotal: 12,
-    spotsRemaining: 5,
-    priceZAR: 230,
-    heroImage: 'https://images.unsplash.com/photo-1593811167562-9cef47bfc4d7?w=800&h=500&fit=crop',
-    whatToBring: ['Yoga mat', 'Grip towel', 'Water bottle', 'Activewear you can sweat in'],
-  },
+  // ── Friday 3 Apr ─────────────────────────────────────────────────────────
+  s('Sunrise Vinyasa Flow',        'Yoga',        DESC.yogaVinyasa,  '2026-04-03', '06:30', '07:30', 60,  INSTRUCTORS.priya,   14,  9, 200, IMG.yogaVinyasa,  BRING.yoga),
+  s('Cold Plunge & Recovery',      'Cold Plunge', DESC.coldRecovery, '2026-04-03', '07:00', '08:00', 60,  INSTRUCTORS.themba,  10,  6, 180, IMG.coldRecovery, BRING.cold),
+  s('Infrared Sauna Journey',      'Sauna',       DESC.saunaInfrared,'2026-04-03', '10:00', '11:00', 60,  INSTRUCTORS.annika,   8,  3, 300, IMG.saunaInfrared,BRING.sauna),
+  s('Power Flow Yoga',             'Yoga',        DESC.yogaPower,    '2026-04-03', '17:30', '18:45', 75,  INSTRUCTORS.priya,   12,  5, 230, IMG.yogaPower,    BRING.yoga),
+  s('Sound & Breathwork Journey',  'Breathwork',  DESC.breathSound,  '2026-04-03', '19:00', '20:30', 90,  INSTRUCTORS.marcus,  12,  4, 350, IMG.breathSound,  BRING.breathwork),
 
-  // ── BREATHWORK ────────────────────────────────────────────────
-  {
-    id: 'b1',
-    name: 'Box Breathwork Fundamentals',
-    category: 'Breathwork',
-    description:
-      'An entry-level breathwork workshop introducing the Box Breathing technique (4-4-4-4) — made famous by US Navy SEALs for stress and anxiety management. Marcus walks you through the science, guides you through multiple rounds, and finishes with integration journaling.',
-    date: '2026-04-04',
-    startTime: '18:30',
-    endTime: '19:30',
-    durationMinutes: 60,
-    instructor: INSTRUCTORS.marcus,
-    spotsTotal: 16,
-    spotsRemaining: 11,
-    priceZAR: 180,
-    heroImage: 'https://images.unsplash.com/photo-1474418397713-7ede21d49118?w=800&h=500&fit=crop',
-    whatToBring: ['Comfortable clothes', 'Yoga mat or blanket to lie on', 'Journal and pen', 'Open curiosity'],
-  },
-  {
-    id: 'b2',
-    name: 'Wim Hof Breathing Method',
-    category: 'Breathwork',
-    description:
-      'Based on the internationally recognised Wim Hof Method, this session guides participants through the three pillars: controlled breathing, cold exposure mindset, and meditation. Experience the intense clarity and energy surge that follows a full breathwork set.',
-    date: '2026-04-06',
-    startTime: '07:00',
-    endTime: '08:00',
-    durationMinutes: 60,
-    instructor: INSTRUCTORS.marcus,
-    spotsTotal: 14,
-    spotsRemaining: 7,
-    priceZAR: 220,
-    heroImage: 'https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=800&h=500&fit=crop',
-    whatToBring: ['Comfortable clothes', 'Mat or cushion', 'Water bottle', 'Note: do NOT do on a full stomach'],
-  },
-  {
-    id: 'b3',
-    name: 'Sound & Breathwork Journey',
-    category: 'Breathwork',
-    description:
-      'A deeply immersive 90-minute experience combining active breathwork rounds with live crystal singing bowl sound healing. Participants are guided into a state of deep relaxation and heightened awareness. Not suitable for those with epilepsy, cardiovascular conditions, or pregnancy.',
-    date: '2026-04-08',
-    startTime: '18:30',
-    endTime: '20:00',
-    durationMinutes: 90,
-    instructor: INSTRUCTORS.marcus,
-    spotsTotal: 12,
-    spotsRemaining: 4,
-    priceZAR: 350,
-    heroImage: 'https://images.unsplash.com/photo-1528360983277-13d401cdc186?w=800&h=500&fit=crop',
-    whatToBring: ['Comfortable, warm clothing', 'Mat, cushion & blanket', 'Eye mask (optional)', 'No devices in session'],
-  },
-  {
-    id: 'b4',
-    name: 'Morning Pranayama & Meditation',
-    category: 'Breathwork',
-    description:
-      'A gentle but powerful morning practice drawing on classical yogic pranayama techniques — Nadi Shodhana, Kapalabhati, and Ujjayi — followed by a 20-minute guided Yoga Nidra relaxation. Perfect as a weekday reset before a busy day.',
-    date: '2026-04-09',
-    startTime: '06:30',
-    endTime: '07:30',
-    durationMinutes: 60,
-    instructor: INSTRUCTORS.marcus,
-    spotsTotal: 16,
-    spotsRemaining: 10,
-    priceZAR: 160,
-    heroImage: 'https://images.unsplash.com/photo-1545205597-3d9d02c29597?w=800&h=500&fit=crop',
-    whatToBring: ['Mat or cushion', 'Blanket', 'Comfortable loose clothing'],
-  },
+  // ── Saturday 4 Apr ───────────────────────────────────────────────────────
+  s('Traditional Finnish Sauna',   'Sauna',       DESC.saunaFinnish, '2026-04-04', '08:00', '09:30', 90,  INSTRUCTORS.annika,  12,  8, 250, IMG.saunaFinnish, BRING.sauna),
+  s('Guided Ice Bath Immersion',   'Cold Plunge', DESC.coldPlunge,   '2026-04-04', '09:00', '10:00', 60,  INSTRUCTORS.themba,   8,  5, 200, IMG.coldPlunge,   BRING.cold),
+  s('Sunrise Vinyasa Flow',        'Yoga',        DESC.yogaVinyasa,  '2026-04-04', '09:30', '10:30', 60,  INSTRUCTORS.priya,   14, 10, 200, IMG.yogaVinyasa,  BRING.yoga),
+  s('Box Breathwork Fundamentals', 'Breathwork',  DESC.breathBox,    '2026-04-04', '11:00', '12:00', 60,  INSTRUCTORS.marcus,  16, 12, 180, IMG.breathBox,    BRING.breathwork),
+  s('Sauna & Steam Ritual',        'Sauna',       DESC.saunaSteam,   '2026-04-04', '15:00', '16:30', 90,  INSTRUCTORS.annika,  10,  7, 350, IMG.saunaSteam,   BRING.sauna),
+  s('Restorative Yin Yoga',        'Yoga',        DESC.yogaYin,      '2026-04-04', '17:00', '18:15', 75,  INSTRUCTORS.priya,   12,  9, 220, IMG.yogaYin,      BRING.yoga),
+
+  // ── Sunday 5 Apr ─────────────────────────────────────────────────────────
+  s('Morning Pranayama & Breath',  'Breathwork',  DESC.breathPrana,  '2026-04-05', '08:00', '09:00', 60,  INSTRUCTORS.marcus,  16, 13, 160, IMG.breathPrana,  BRING.breathwork),
+  s('Contrast Therapy Circuit',    'Cold Plunge', DESC.coldContrast, '2026-04-05', '09:00', '10:30', 90,  INSTRUCTORS.themba,  12,  8, 380, IMG.coldContrast, BRING.cold),
+  s('Power Flow Yoga',             'Yoga',        DESC.yogaPower,    '2026-04-05', '10:30', '11:45', 75,  INSTRUCTORS.priya,   12,  6, 230, IMG.yogaPower,    BRING.yoga),
+  s('Infrared Sauna Journey',      'Sauna',       DESC.saunaInfrared,'2026-04-05', '15:00', '16:00', 60,  INSTRUCTORS.annika,   8,  4, 300, IMG.saunaInfrared,BRING.sauna),
+
+  // ── Monday 6 Apr ─────────────────────────────────────────────────────────
+  s('Cold Plunge & Recovery',      'Cold Plunge', DESC.coldRecovery, '2026-04-06', '06:00', '07:00', 60,  INSTRUCTORS.themba,  10,  7, 180, IMG.coldRecovery, BRING.cold),
+  s('Sunrise Vinyasa Flow',        'Yoga',        DESC.yogaVinyasa,  '2026-04-06', '06:30', '07:30', 60,  INSTRUCTORS.priya,   14, 11, 200, IMG.yogaVinyasa,  BRING.yoga),
+  s('Traditional Finnish Sauna',   'Sauna',       DESC.saunaFinnish, '2026-04-06', '09:00', '10:30', 90,  INSTRUCTORS.annika,  12,  9, 250, IMG.saunaFinnish, BRING.sauna),
+  s('Box Breathwork Fundamentals', 'Breathwork',  DESC.breathBox,    '2026-04-06', '12:00', '13:00', 60,  INSTRUCTORS.marcus,  16, 14, 180, IMG.breathBox,    BRING.breathwork),
+  s('Power Flow Yoga',             'Yoga',        DESC.yogaPower,    '2026-04-06', '18:00', '19:15', 75,  INSTRUCTORS.priya,   12,  8, 230, IMG.yogaPower,    BRING.yoga),
+  s('Wim Hof Breathing Method',    'Breathwork',  DESC.breathWimHof, '2026-04-06', '19:00', '20:00', 60,  INSTRUCTORS.marcus,  14,  7, 220, IMG.breathWimHof, BRING.breathwork),
+
+  // ── Tuesday 7 Apr ────────────────────────────────────────────────────────
+  s('Morning Pranayama & Breath',  'Breathwork',  DESC.breathPrana,  '2026-04-07', '06:30', '07:30', 60,  INSTRUCTORS.marcus,  16, 10, 160, IMG.breathPrana,  BRING.breathwork),
+  s('Guided Ice Bath Immersion',   'Cold Plunge', DESC.coldPlunge,   '2026-04-07', '07:00', '08:00', 60,  INSTRUCTORS.themba,   8,  3, 200, IMG.coldPlunge,   BRING.cold),
+  s('Infrared Sauna Journey',      'Sauna',       DESC.saunaInfrared,'2026-04-07', '09:00', '10:00', 60,  INSTRUCTORS.annika,   8,  5, 300, IMG.saunaInfrared,BRING.sauna),
+  s('Restorative Yin Yoga',        'Yoga',        DESC.yogaYin,      '2026-04-07', '17:30', '18:45', 75,  INSTRUCTORS.priya,   12,  6, 220, IMG.yogaYin,      BRING.yoga),
+  s('Sound & Breathwork Journey',  'Breathwork',  DESC.breathSound,  '2026-04-07', '18:30', '20:00', 90,  INSTRUCTORS.marcus,  12,  2, 350, IMG.breathSound,  BRING.breathwork),
+
+  // ── Wednesday 8 Apr ──────────────────────────────────────────────────────
+  s('Cold Plunge & Recovery',      'Cold Plunge', DESC.coldRecovery, '2026-04-08', '06:00', '07:00', 60,  INSTRUCTORS.themba,  10,  8, 180, IMG.coldRecovery, BRING.cold),
+  s('Sunrise Vinyasa Flow',        'Yoga',        DESC.yogaVinyasa,  '2026-04-08', '07:00', '08:00', 60,  INSTRUCTORS.priya,   14,  9, 200, IMG.yogaVinyasa,  BRING.yoga),
+  s('Sauna & Steam Ritual',        'Sauna',       DESC.saunaSteam,   '2026-04-08', '10:00', '11:30', 90,  INSTRUCTORS.annika,  10,  6, 350, IMG.saunaSteam,   BRING.sauna),
+  s('Box Breathwork Fundamentals', 'Breathwork',  DESC.breathBox,    '2026-04-08', '12:00', '13:00', 60,  INSTRUCTORS.marcus,  16, 12, 180, IMG.breathBox,    BRING.breathwork),
+  s('Contrast Therapy Circuit',    'Cold Plunge', DESC.coldContrast, '2026-04-08', '17:00', '18:30', 90,  INSTRUCTORS.themba,  12,  9, 380, IMG.coldContrast, BRING.cold),
+  s('Wim Hof Breathing Method',    'Breathwork',  DESC.breathWimHof, '2026-04-08', '19:00', '20:00', 60,  INSTRUCTORS.marcus,  14,  7, 220, IMG.breathWimHof, BRING.breathwork),
+
+  // ── Thursday 9 Apr ───────────────────────────────────────────────────────
+  s('Morning Pranayama & Breath',  'Breathwork',  DESC.breathPrana,  '2026-04-09', '06:30', '07:30', 60,  INSTRUCTORS.marcus,  16, 11, 160, IMG.breathPrana,  BRING.breathwork),
+  s('Power Flow Yoga',             'Yoga',        DESC.yogaPower,    '2026-04-09', '07:00', '08:15', 75,  INSTRUCTORS.priya,   12,  5, 230, IMG.yogaPower,    BRING.yoga),
+  s('Traditional Finnish Sauna',   'Sauna',       DESC.saunaFinnish, '2026-04-09', '09:00', '10:30', 90,  INSTRUCTORS.annika,  12,  8, 250, IMG.saunaFinnish, BRING.sauna),
+  s('Guided Ice Bath Immersion',   'Cold Plunge', DESC.coldPlunge,   '2026-04-09', '12:00', '13:00', 60,  INSTRUCTORS.themba,   8,  4, 200, IMG.coldPlunge,   BRING.cold),
+  s('Restorative Yin Yoga',        'Yoga',        DESC.yogaYin,      '2026-04-09', '18:00', '19:15', 75,  INSTRUCTORS.priya,   12,  7, 220, IMG.yogaYin,      BRING.yoga),
+  s('Sound & Breathwork Journey',  'Breathwork',  DESC.breathSound,  '2026-04-09', '19:00', '20:30', 90,  INSTRUCTORS.marcus,  12,  5, 350, IMG.breathSound,  BRING.breathwork),
 ];
 
-// ── Featured / promoted sessions (shown on home screen) ─────────────────────
+// ── Featured session IDs (for home screen) ───────────────────────────────────
 
-export const FEATURED_SESSION_IDS = ['s1', 'c3', 'b3'];
+export const FEATURED_SESSION_IDS = ['s3', 's19', 's28']; // Finnish Sauna, Contrast, Sound Journey
 
-// ── Dummy authenticated user ─────────────────────────────────────────────────
-
-export const DUMMY_USER = {
-  firstName: 'Sarah',
-  lastName: 'Müller',
-  email: 'sarah.muller@example.com',
-  membershipTier: 'Regular' as const,
-  avatar: 'https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?w=200&h=200&fit=crop&crop=face',
-};
-
-// ── Membership tiers info ────────────────────────────────────────────────────
+// ── Membership tiers ─────────────────────────────────────────────────────────
 
 export const MEMBERSHIP_TIERS = {
   Explorer: {

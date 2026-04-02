@@ -6,7 +6,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useApp } from '../context/AppContext';
-import { SESSIONS, FEATURED_SESSION_IDS } from '../data/mockData';
+import { SESSIONS, FEATURED_SESSION_IDS, CATEGORY_IMAGES } from '../data/mockData';
 import SessionCard from '../components/SessionCard';
 import CategoryTile from '../components/CategoryTile';
 import { Category } from '../types';

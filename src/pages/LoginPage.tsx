@@ -38,13 +38,13 @@ export default function LoginPage() {
     // Simulate a brief loading state, then log in
     setTimeout(() => {
       login();
-      navigate('/home', { replace: true });
+      navigate('/onboarding', { replace: true });
     }, 700);
   }
 
   function handleSocialLogin() {
     login();
-    navigate('/home', { replace: true });
+    navigate('/onboarding', { replace: true });
   }
 
   return (
