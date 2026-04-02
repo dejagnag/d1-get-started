@@ -42,10 +42,14 @@ export const INSTRUCTORS: Record<string, Instructor> = {
 // ── Category hero images ─────────────────────────────────────────────────────
 
 export const CATEGORY_IMAGES: Record<Category, string> = {
-  Sauna: 'https://images.unsplash.com/photo-1545558014-8692077e9b5c?w=800&h=500&fit=crop',
-  'Cold Plunge': 'https://images.unsplash.com/photo-1455793082547-f5a2789e7c0e?w=800&h=500&fit=crop',
-  Yoga: 'https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=800&h=500&fit=crop',
-  Breathwork: 'https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=800&h=500&fit=crop',
+  // Bright light-wood sauna interior — clean Scandinavian lines
+  Sauna: 'https://images.unsplash.com/photo-1584622650111-993a426fbf0a?w=800&h=500&fit=crop',
+  // Crystal-clear pool with geometric tile — minimal & graphic
+  'Cold Plunge': 'https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=800&h=500&fit=crop',
+  // Bright studio with natural light flooding through windows
+  Yoga: 'https://images.unsplash.com/photo-1599901860904-17e6ed7083a0?w=800&h=500&fit=crop',
+  // Serene outdoor meditation, soft natural light
+  Breathwork: 'https://images.unsplash.com/photo-1474418397713-7ede21d49118?w=800&h=500&fit=crop',
 };
 
 export const CATEGORY_COLORS: Record<Category, { bg: string; text: string; border: string }> = {
@@ -73,7 +77,7 @@ export const SESSIONS: Session[] = [
     spotsTotal: 12,
     spotsRemaining: 5,
     priceZAR: 250,
-    heroImage: 'https://images.unsplash.com/photo-1545558014-8692077e9b5c?w=800&h=500&fit=crop',
+    heroImage: 'https://images.unsplash.com/photo-1584622650111-993a426fbf0a?w=800&h=500&fit=crop',
     whatToBring: ['Towel (two if possible)', 'Swimwear or sarong', 'Water bottle', 'Flip-flops', 'Open mind'],
   },
   {
@@ -90,7 +94,7 @@ export const SESSIONS: Session[] = [
     spotsTotal: 8,
     spotsRemaining: 3,
     priceZAR: 300,
-    heroImage: 'https://images.unsplash.com/photo-1579547657220-cf6c0d89e2b9?w=800&h=500&fit=crop',
+    heroImage: 'https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?w=800&h=500&fit=crop',
     whatToBring: ['Light towel', 'Loose clothing for after', 'Water bottle'],
   },
   {
@@ -107,7 +111,7 @@ export const SESSIONS: Session[] = [
     spotsTotal: 10,
     spotsRemaining: 7,
     priceZAR: 350,
-    heroImage: 'https://images.unsplash.com/photo-1534438097545-a2c22c57f2ad?w=800&h=500&fit=crop',
+    heroImage: 'https://images.unsplash.com/photo-1597733336794-12d05021d510?w=800&h=500&fit=crop',
     whatToBring: ['Two towels', 'Swimwear', 'Water bottle', 'Any personal skin products'],
   },
 
@@ -126,7 +130,7 @@ export const SESSIONS: Session[] = [
     spotsTotal: 8,
     spotsRemaining: 4,
     priceZAR: 200,
-    heroImage: 'https://images.unsplash.com/photo-1455793082547-f5a2789e7c0e?w=800&h=500&fit=crop',
+    heroImage: 'https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=800&h=500&fit=crop',
     whatToBring: ['Swimwear', 'Warm dry clothes for after', 'Towel', 'Water bottle'],
   },
   {
@@ -143,7 +147,7 @@ export const SESSIONS: Session[] = [
     spotsTotal: 10,
     spotsRemaining: 6,
     priceZAR: 180,
-    heroImage: 'https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=800&h=500&fit=crop',
+    heroImage: 'https://images.unsplash.com/photo-1520209759809-a9bcb6cb3241?w=800&h=500&fit=crop',
     whatToBring: ['Swimwear', 'Warm towel', 'Foam roller (optional)', 'Protein snack for after'],
   },
   {
@@ -160,7 +164,7 @@ export const SESSIONS: Session[] = [
     spotsTotal: 12,
     spotsRemaining: 8,
     priceZAR: 380,
-    heroImage: 'https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=800&h=500&fit=crop',
+    heroImage: 'https://images.unsplash.com/photo-1575377222312-dd1a63a51638?w=800&h=500&fit=crop',
     whatToBring: ['Swimwear', 'Two towels', 'Water bottle', 'Warm layers for after'],
   },
 
@@ -179,7 +183,7 @@ export const SESSIONS: Session[] = [
     spotsTotal: 14,
     spotsRemaining: 9,
     priceZAR: 200,
-    heroImage: 'https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=800&h=500&fit=crop',
+    heroImage: 'https://images.unsplash.com/photo-1599901860904-17e6ed7083a0?w=800&h=500&fit=crop',
     whatToBring: ['Yoga mat', 'Comfortable activewear', 'Small towel', 'Water bottle'],
   },
   {
@@ -196,7 +200,7 @@ export const SESSIONS: Session[] = [
     spotsTotal: 12,
     spotsRemaining: 2,
     priceZAR: 220,
-    heroImage: 'https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=800&h=500&fit=crop',
+    heroImage: 'https://images.unsplash.com/photo-1588286840104-8957b019727f?w=800&h=500&fit=crop',
     whatToBring: ['Yoga mat', 'Blanket or large towel', 'Bolster (provided if needed)', 'Comfortable, loose clothing'],
   },
   {
@@ -232,7 +236,7 @@ export const SESSIONS: Session[] = [
     spotsTotal: 16,
     spotsRemaining: 11,
     priceZAR: 180,
-    heroImage: 'https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=800&h=500&fit=crop',
+    heroImage: 'https://images.unsplash.com/photo-1474418397713-7ede21d49118?w=800&h=500&fit=crop',
     whatToBring: ['Comfortable clothes', 'Yoga mat or blanket to lie on', 'Journal and pen', 'Open curiosity'],
   },
   {
@@ -249,7 +253,7 @@ export const SESSIONS: Session[] = [
     spotsTotal: 14,
     spotsRemaining: 7,
     priceZAR: 220,
-    heroImage: 'https://images.unsplash.com/photo-1545205597-3d9d02c29597?w=800&h=500&fit=crop',
+    heroImage: 'https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=800&h=500&fit=crop',
     whatToBring: ['Comfortable clothes', 'Mat or cushion', 'Water bottle', 'Note: do NOT do on a full stomach'],
   },
   {
@@ -283,7 +287,7 @@ export const SESSIONS: Session[] = [
     spotsTotal: 16,
     spotsRemaining: 10,
     priceZAR: 160,
-    heroImage: 'https://images.unsplash.com/photo-1518611012118-696072aa579a?w=800&h=500&fit=crop',
+    heroImage: 'https://images.unsplash.com/photo-1545205597-3d9d02c29597?w=800&h=500&fit=crop',
     whatToBring: ['Mat or cushion', 'Blanket', 'Comfortable loose clothing'],
   },
 ];

@@ -40,9 +40,9 @@ export default function HomePage() {
       {/* ── Header / hero ────────────────────────────────────── */}
       <div className="relative -mx-4 bg-charcoal overflow-hidden">
         <img
-          src="https://images.unsplash.com/photo-1534438097545-a2c22c57f2ad?w=600&h=320&fit=crop&q=70"
+          src="https://images.unsplash.com/photo-1515377905703-c4788e51af15?w=600&h=320&fit=crop&q=70"
           alt="Anne Wellness"
-          className="w-full h-48 object-cover opacity-60"
+          className="w-full h-48 object-cover opacity-75"
         />
         <div className="absolute inset-0 bg-gradient-to-b from-charcoal/20 to-charcoal/80" />
         <div className="absolute bottom-0 left-0 right-0 px-5 pb-5 pt-8">
