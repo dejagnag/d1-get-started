@@ -7,45 +7,36 @@ export default {
   theme: {
     extend: {
       colors: {
-        // Scandinavian wellness palette
-        cream: {
-          DEFAULT: '#FAF8F5',
-          dark: '#F0EBE3',
+        // Platō / Sauna Goose palette
+        obsidian: {
+          DEFAULT: '#1A1A1A',
+          light:   '#3A3A3A',
+          muted:   '#6B6B6B',
         },
-        charcoal: {
-          DEFAULT: '#2C2C2C',
-          light: '#4A4A4A',
+        cobalt: {
+          DEFAULT: '#2E5BFF',
+          light:   '#5B7FFF',
+          dark:    '#1A3FCC',
         },
-        sage: {
-          DEFAULT: '#7A9A6E',
-          light: '#B8CEB0',
-          lighter: '#DCE9D8',
-          dark: '#5C7A52',
-        },
-        wood: {
-          DEFAULT: '#C4A882',
-          light: '#E8D5BD',
-          lighter: '#F5EDE0',
-          dark: '#9E7A52',
-        },
-        stone: {
-          DEFAULT: '#8A8680',
-          light: '#C8C4BE',
-          lighter: '#ECEAE6',
+        void: {
+          DEFAULT:  '#FFFFFF',
+          dim:      '#F7F7F7',
+          subtle:   '#F0F0F0',
+          border:   '#E0E0E0',
+          hairline: '#EBEBEB',
         },
       },
       fontFamily: {
-        sans: ['DM Sans', 'Inter', 'system-ui', 'sans-serif'],
+        display: ['Syne', 'Montserrat', 'system-ui', 'sans-serif'],
+        mono:    ['JetBrains Mono', 'monospace'],
+        sans:    ['Inter', 'system-ui', 'sans-serif'],
       },
-      borderRadius: {
-        '2xl': '1rem',
-        '3xl': '1.5rem',
-        '4xl': '2rem',
+      letterSpacing: {
+        'display': '0.12em',
+        'wide-xl': '0.08em',
       },
-      boxShadow: {
-        'soft': '0 2px 16px rgba(0,0,0,0.06)',
-        'card': '0 4px 24px rgba(0,0,0,0.08)',
-        'elevated': '0 8px 40px rgba(0,0,0,0.12)',
+      borderWidth: {
+        'hair': '0.5px',
       },
     },
   },
