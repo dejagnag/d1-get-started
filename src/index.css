@@ -1,0 +1,127 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── Base styles ── */
+@layer base {
+  html {
+    font-family: 'DM Sans', Inter, system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    background-color: #FAF8F5;
+    color: #2C2C2C;
+    min-height: 100dvh;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 4px;
+    height: 4px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #C8C4BE;
+    border-radius: 2px;
+  }
+}
+
+/* ── Utility components ── */
+@layer components {
+  /* Page container — max width, centred, with bottom-nav padding */
+  .page-container {
+    @apply max-w-md mx-auto min-h-dvh pb-24 px-4;
+  }
+
+  /* Full-bleed page (no horizontal padding; e.g. detail pages with hero) */
+  .page-container-full {
+    @apply max-w-md mx-auto min-h-dvh pb-24;
+  }
+
+  /* Primary button */
+  .btn-primary {
+    @apply w-full py-3.5 rounded-2xl bg-sage text-white font-semibold text-base
+           active:scale-[0.98] transition-all duration-150 shadow-soft
+           disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+
+  /* Secondary / outline button */
+  .btn-secondary {
+    @apply w-full py-3.5 rounded-2xl border-2 border-sage text-sage font-semibold text-base
+           active:scale-[0.98] transition-all duration-150;
+  }
+
+  /* Ghost button */
+  .btn-ghost {
+    @apply py-2 px-4 rounded-xl text-charcoal-light font-medium text-sm
+           active:bg-stone-lighter transition-all duration-150;
+  }
+
+  /* Card */
+  .card {
+    @apply bg-white rounded-3xl shadow-soft overflow-hidden;
+  }
+
+  /* Input field */
+  .input-field {
+    @apply w-full px-4 py-3.5 rounded-2xl border border-stone-light bg-white
+           text-charcoal placeholder:text-stone focus:outline-none
+           focus:border-sage focus:ring-2 focus:ring-sage/20
+           transition-all duration-150;
+  }
+
+  /* Category chip / badge */
+  .category-badge {
+    @apply inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-semibold;
+  }
+
+  /* Section heading */
+  .section-heading {
+    @apply text-lg font-semibold text-charcoal tracking-tight;
+  }
+
+  /* Subtle divider */
+  .divider {
+    @apply border-t border-stone-lighter my-4;
+  }
+}
+
+/* ── Animations ── */
+@layer utilities {
+  .animate-fade-in {
+    animation: fadeIn 0.3s ease-out forwards;
+  }
+
+  .animate-slide-up {
+    animation: slideUp 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Texture overlay helper ── */
+.texture-overlay {
+  background-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+}
+
+/* ── iOS safe-area bottom padding for bottom nav ── */
+.safe-bottom {
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
